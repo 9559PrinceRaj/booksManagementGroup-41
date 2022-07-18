@@ -3,6 +3,7 @@ const vaidator = require("validator")
 const { default: isEmail } = require("validator/lib/isemail")
 const jwt = require("jsonwebtoken")
 
+
 //============================================================= validation ==================================================================//
 const isValid = function (value) {
     if (typeof value === 'undefined' || value === null) return false
@@ -125,4 +126,5 @@ const loginUser = async function (req, res) {
 module.exports = {
     createUser,
     loginUser
+    
 }

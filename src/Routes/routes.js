@@ -4,29 +4,34 @@ const userController = require("../controllers/userController")
 const bookcontroller = require("../controllers/bookController")
 const reviewcontroller = require("../controllers/reviewController")
 const middleware = require("../middleware/auth")
+const aws = require("aws-sdk")
 
-router.post("/register",userController.createUser)
+router.post("/register", userController.createUser)
 
-router.post("/login",userController.loginUser)
+router.post("/login", userController.loginUser)
 
-router.post("/books", middleware.authentication,bookcontroller.createbook)  // all books api should be authenticated 
+router.post("/write-file-aws",bookcontroller.bookCover)
 
-router.get("/books", middleware.authentication,bookcontroller.getbooks)   // authorization in create update and delete
+router.post("/books", middleware.authentication, bookcontroller.createbook)  // all books api should be authenticated 
 
-router.get("/books/:bookId",middleware.authentication,bookcontroller.getbooksbyId)
+router.get("/books", middleware.authentication, bookcontroller.getbooks)   // authorization in create update and delete
 
-router.put("/books/:bookId",middleware.authentication,bookcontroller.updateBooks)
+router.get("/books/:bookId", middleware.authentication, bookcontroller.getbooksbyId)
 
-router.delete("/books/:bookId",middleware.authentication,bookcontroller.deleteBookById)
+router.put("/books/:bookId", middleware.authentication, bookcontroller.updateBooks)
 
-router.post("/books/:bookId/review",middleware.authentication,reviewcontroller.createreveiw)
+router.delete("/bookbookIds/:", middleware.authentication, bookcontroller.deleteBookById)
 
-router.put("/books/:bookId/review/:reviewId",middleware.authentication,reviewcontroller.updatereview)
+router.post("/books/:bookId/review", middleware.authentication, reviewcontroller.createreveiw)
 
-router.delete("/books/:bookId/review/:reviewId",middleware.authentication,reviewcontroller.deletereview)
+router.put("/books/:bookId/review/:reviewId", middleware.authentication, reviewcontroller.updatereview)
 
-router.all('/*', async function(req, res){
-    res.status(404).send({status: false, msg: "Page Not Found!!!"})
+router.delete("/books/:bookId/review/:reviewId", middleware.authentication, reviewcontroller.deletereview)
+
+
+
+router.all('/*', async function (req, res) {
+    res.status(404).send({ status: false, msg: "Page Not Found!!!" })
 })
 
 

@@ -52,6 +52,11 @@ const bookSchema = new mongoose.Schema({
     releasedAt: {
         type: Date,
         default: moment(new Date()).format("YYYY-MM-DD")
+    },
+    
+    bookCover:{
+        type:String,
+        required:true
     }
 }, { timestamps: true })
 

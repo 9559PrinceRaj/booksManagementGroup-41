@@ -56,7 +56,7 @@ const createreveiw = async function (req, res) {
         
         let getDetails = await bookModel.findOneAndUpdate({ _id: bookid }, { $inc: { reviews: 1 } }, { new: true }).select({__v: 0})
         let {...bookData} = getDetails
-        // console.log(bookData) 
+        
         bookData._doc.reviewsData = reviewDetails
         
         res.status(201).send({ status: true, message: "Success", data: bookData._doc })
